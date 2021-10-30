@@ -1,6 +1,6 @@
 # xdotoolJS - a deno.js wrapper around the GNU/Linux X server automation tool, xdotool
 
-## Make sure you have `xdotool` installed
+## Make sure you have [`xdotool`](https://github.com/jordansissel/xdotool) or [`windotool`](https://github.com/creeperkafasi/windotool) installed
 
 ## REQUIRES RUN PERMISSIONS, RUN WITH `--allow-run`
 

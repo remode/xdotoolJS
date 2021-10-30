@@ -1,9 +1,4 @@
-/**
- * NOTICE: THE DOCUMENTATION PRESENT IN THIS FILE IS AN ADAPTED
- * VERSION OF THE xdotool MANUAL PAGE, ALL CREDIT GOES TO THE 
- * RESPECTIVE COPYRIGHT HOLDERS
- */
-
+import os from "https://deno.land/x/dos@v0.11.0/mod.ts";
 
 /**
  * xdotool − command−line X11 automation tool
@@ -14,12 +9,15 @@
  * @param args 
  * @returns 
  */
- async function xdotoolRun(args: string[] = []) {
+async function xdotoolRun(args: string[] = []) {
     const xdotool = Deno.run({
-        cmd: ["xdotool"].concat(args), stdout: "piped", stderr: "piped", stdin: "piped"
+        cmd: [
+            (os.platform() == "windows") ? "windotool" : "xdotool"
+        ].concat(args.filter(element => element !== "")), // Remove the empty arguments, necessary for windotool
+        stdout: "piped", stderr: "piped", stdin: "piped"
     })
 
     return (new TextDecoder().decode(await xdotool.output())) || (new TextDecoder().decode(await xdotool.stderrOutput()))
 }
 
-export {xdotoolRun}
+export { xdotoolRun }
