@@ -1,4 +1,4 @@
-import os from "https://deno.land/x/dos@v0.11.0/mod.ts";
+import {osType} from "https://deno.land/std@0.120.0/_util/os.ts"
 
 /**
  * xdotool − command−line X11 automation tool
@@ -12,7 +12,7 @@ import os from "https://deno.land/x/dos@v0.11.0/mod.ts";
 async function xdotoolRun(args: string[] = []) {
     const xdotool = Deno.run({
         cmd: [
-            (os.platform() == "windows") ? "windotool" : "xdotool"
+            (osType == "windows") ? "windotool" : "xdotool"
         ].concat(args.filter(element => element !== "")), // Remove the empty arguments, necessary for windotool
         stdout: "piped", stderr: "piped", stdin: "piped"
     })
